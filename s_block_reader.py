@@ -5,6 +5,9 @@ from exceptions import InvalidSBlockFileException
 
 
 class SBlockReader:
+    def __init__(self, path_resources: str):
+        self.path_resources = path_resources
+
     def read(self, filename: str):
         matrix = self.read_matrix(filename)
         number_of_rows = len(matrix)
@@ -19,6 +22,6 @@ class SBlockReader:
         raise InvalidSBlockFileException()
 
     def read_matrix(self, filename: str) -> list[list[int]]:
-        with open(filename, "r") as file:
+        with open(f"{self.path_resources}/{filename}", "r") as file:
             matrix = json.load(file)
         return matrix

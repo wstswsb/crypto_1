@@ -2,6 +2,15 @@ from abc import ABC, abstractmethod
 
 
 class SBlock(ABC):
+    @property
+    @abstractmethod
+    def input_bit_size(self) -> int:
+        pass
+
+    @property
+    @abstractmethod
+    def output_bit_size(self) -> int:
+        pass
 
     @property
     @abstractmethod
@@ -33,6 +42,16 @@ class SBlock(ABC):
 class SBlock2Rows8Columns(SBlock):
     def __init__(self, matrix: list[list[int]]):
         self.__matrix = matrix
+        self.__input_bit_size = 4
+        self.__output_bit_size = 3
+
+    @property
+    def input_bit_size(self) -> int:
+        return self.__input_bit_size
+
+    @property
+    def output_bit_size(self) -> int:
+        return self.__output_bit_size
 
     @property
     def matrix(self):
@@ -48,6 +67,16 @@ class SBlock2Rows8Columns(SBlock):
 class SBlock4Rows4Columns(SBlock):
     def __init__(self, matrix: list[list[int]]):
         self.__matrix = matrix
+        self.__input_bit_size = 4
+        self.__output_bit_size = 2
+
+    @property
+    def input_bit_size(self) -> int:
+        return self.__input_bit_size
+
+    @property
+    def output_bit_size(self) -> int:
+        return self.__output_bit_size
 
     @property
     def matrix(self):
