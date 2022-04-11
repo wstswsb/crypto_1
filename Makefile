@@ -15,5 +15,6 @@ tests: use_secrets
 lint:
 	flake8 ./
 
-run: remove_databases
+run: use_secrets
+	rm ./*sqlite
 	python main.py

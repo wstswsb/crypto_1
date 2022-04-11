@@ -1,3 +1,5 @@
+from click import echo, style
+
 from s_block import SBlock
 from .bit_computing_service import BitComputingService
 from repositories import AInputsOutputsCRepository, ProbabilityACRepository
@@ -9,17 +11,20 @@ class SBlockAnalyticsService:
             self,
             s_block: SBlock,
             bit_computing_service: BitComputingService,
-            a_inputs_outputs_c_repository: AInputsOutputsCRepository,
+            a_in_out_c_repository: AInputsOutputsCRepository,
             probability_a_c_repository: ProbabilityACRepository):
         self.s_block = s_block
         self.bit_computing_service = bit_computing_service
-        self.a_in_out_c_repository = a_inputs_outputs_c_repository
+        self.a_in_out_c_repository = a_in_out_c_repository
         self.probability_a_c_repository = probability_a_c_repository
 
-        self.max_input = bit_computing_service.create_continuous_bitmask(s_block.input_bit_size)
-        self.max_output = bit_computing_service.create_continuous_bitmask(s_block.output_bit_size)
+        self.max_input, self.max_output = [
+            bit_computing_service.create_continuous_mask(length)
+            for length
+            in [self.s_block.input_length, self.s_block.output_length]
+        ]
 
-    def analyze_s_block(self) -> ProbabilityAC:
+    def compute_most_probabilistic(self) -> ProbabilityAC:
         self.build_a_inputs_outputs_table()
         self.build_a_c_table()
         return self.find_most_probabilistic()
@@ -67,12 +72,15 @@ class SBlockAnalyticsService:
         if items[0].probability == 1.0:
             items = items[1:]
 
-        self.check_uniqueness_probability(items)
+        if not self.is_uniqueness_probability(items):
+            warning = f"WARNING: number of most probabilities = {len(items)}"
+            echo(style(warning, fg="red"))
+
         return items[0]
 
-    def check_uniqueness_probability(self, models: list[ProbabilityAC]):
+    def is_uniqueness_probability(self, models: list[ProbabilityAC]) -> bool:
         if len(models) < 2:
-            return
+            return True
         if models[0].probability == models[1].probability:
-            print(models)
-            raise Exception("Probability is not unique")
+            return False
+        return True

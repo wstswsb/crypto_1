@@ -4,12 +4,12 @@ from abc import ABC, abstractmethod
 class SBlock(ABC):
     @property
     @abstractmethod
-    def input_bit_size(self) -> int:
+    def input_length(self) -> int:
         pass
 
     @property
     @abstractmethod
-    def output_bit_size(self) -> int:
+    def output_length(self) -> int:
         pass
 
     @property
@@ -46,11 +46,11 @@ class SBlock2Rows8Columns(SBlock):
         self.__output_bit_size = 3
 
     @property
-    def input_bit_size(self) -> int:
+    def input_length(self) -> int:
         return self.__input_bit_size
 
     @property
-    def output_bit_size(self) -> int:
+    def output_length(self) -> int:
         return self.__output_bit_size
 
     @property
@@ -71,11 +71,11 @@ class SBlock4Rows4Columns(SBlock):
         self.__output_bit_size = 2
 
     @property
-    def input_bit_size(self) -> int:
+    def input_length(self) -> int:
         return self.__input_bit_size
 
     @property
-    def output_bit_size(self) -> int:
+    def output_length(self) -> int:
         return self.__output_bit_size
 
     @property

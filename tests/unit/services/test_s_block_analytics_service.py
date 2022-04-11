@@ -9,13 +9,13 @@ class TestSBlockAnalyticsService:
         self.default_a = 3
         self.s_block_mock = Mock()
         self.bit_computing_service_mock = Mock()
-        self.a_inputs_outputs_repository_mock = Mock()
+        self.a_in_out_repository_mock = Mock()
         self.probability_a_c_repository_mock = Mock()
 
         self.service = SBlockAnalyticsService(
             s_block=self.s_block_mock,
             bit_computing_service=self.bit_computing_service_mock,
-            a_inputs_outputs_c_repository=self.a_inputs_outputs_repository_mock,
+            a_in_out_c_repository=self.a_in_out_repository_mock,
             probability_a_c_repository=self.probability_a_c_repository_mock,
         )
         self.service.max_input = 0b1111
@@ -53,7 +53,7 @@ class TestSBlockAnalyticsService:
 
     def test_generate_probabilities_a_c(self):
         models = self.generate_models()
-        self.a_inputs_outputs_repository_mock \
+        self.a_in_out_repository_mock \
             .find_by_a \
             .return_value = models
 

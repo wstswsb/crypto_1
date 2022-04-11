@@ -1,13 +1,14 @@
-from structure import first_s_block_analytics_service
+from structure import s_block_1_analytics_service
 
 
 class TestFirstSBlockAnalyticsService:
     def setup(self):
-        self.service = first_s_block_analytics_service
+        self.service = s_block_1_analytics_service
         self.repository = self.service.a_in_out_c_repository
+        self.table_name = self.repository.table_name
 
     def teardown(self):
-        self.repository.cursor.execute(f"DELETE FROM {self.repository.table_name}")
+        self.repository.cursor.execute(f"DELETE FROM {self.table_name}")
         self.repository.connection.commit()
 
     def test_generate_in_out_c_equals_inputs(self):
@@ -45,6 +46,6 @@ class TestFirstSBlockAnalyticsService:
 
     def test_build_a_inputs_outputs_table(self):
         self.service.build_a_inputs_outputs_table()
-        self.repository.cursor.execute(f"SELECT * FROM {self.repository.table_name}")
+        self.repository.cursor.execute(f"SELECT * FROM {self.table_name}")
         values = self.repository.cursor.fetchall()
         assert len(values) == 256

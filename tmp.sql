@@ -13,5 +13,6 @@ CREATE TABLE IF NOT EXISTS probability_a_c (
     probability REAL NOT NULL
 );
 
-SELECT a, input_1, input_2, output_1, output_2, c FROM a_inputs_outputs_c
-WHERE a=5;
+CREATE TABLE IF NOT EXISTS key_1_1 (
+    key INTEGER NOT NULL
+);

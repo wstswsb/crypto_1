@@ -15,27 +15,27 @@ class TestBitPermutationService:
 
     def test_do_bit_permutation_zeros_block(self):
         block = 0b0000_0000
-        assert self.service.do_bit_permutation(block) == 0
+        assert self.service.permute(block) == 0
 
     def test_do_bit_permutation_ones_block(self):
         block = 0b1111_1111
-        assert self.service.do_bit_permutation(block) == 0b1111_1111
+        assert self.service.permute(block) == 0b1111_1111
 
     def test_do_bit_permutation_case_1(self):
         block = 0b0000_1111
-        assert self.service.do_bit_permutation(block) == 0b1100_1001
+        assert self.service.permute(block) == 0b1100_1001
 
     def test_do_bit_permutation_case_2(self):
         block = 0b1111_0000
-        assert self.service.do_bit_permutation(block) == 0b0011_0110
+        assert self.service.permute(block) == 0b0011_0110
 
     def test_do_bit_permutation_case_3(self):
         block = 0b0101_0101
-        assert self.service.do_bit_permutation(block) == 0b1001_0101
+        assert self.service.permute(block) == 0b1001_0101
 
     def test_do_bit_permutation_case_4(self):
         block = 0b1010_1010
-        assert self.service.do_bit_permutation(block) == 0b0110_1010
+        assert self.service.permute(block) == 0b0110_1010
 
 
 class TestBitPermutationWithExpansionService:
@@ -50,32 +50,32 @@ class TestBitPermutationWithExpansionService:
 
     def test_do_bit_permutation_ones_block(self):
         block = 0b1111_1111
-        assert self.service.do_bit_permutation(block) == 0b1111_1111_1111
+        assert self.service.permute(block) == 0b1111_1111_1111
 
     def test_do_bit_permutation_zeros_block(self):
         block = 0b0000_0000
-        assert self.service.do_bit_permutation(block) == 0
+        assert self.service.permute(block) == 0
 
     def test_do_bit_permutation_case_1(self):
         block = 0b1010_1010
-        assert self.service.do_bit_permutation(block) == 0b1010_0110_0101
+        assert self.service.permute(block) == 0b1010_0110_0101
 
     def test_do_bit_permutation_case_2(self):
         block = 0b1111_0000
-        assert self.service.do_bit_permutation(block) == 0b0010_1011_1001
+        assert self.service.permute(block) == 0b0010_1011_1001
 
     def test_do_bit_permutation_case_3(self):
         block = 0b0111_1110
-        assert self.service.do_bit_permutation(block) == 0b1110_1101_1110
+        assert self.service.permute(block) == 0b1110_1101_1110
 
     def test_reverse_bit_permutation_case_1(self):
         block = 0b1010_0110_0101
-        assert self.service.reverse_bit_permutation(block) == 0b1010_1010
+        assert self.service.reverse_permutation(block) == 0b1010_1010
 
     def test_reverse_bit_permutation_case_2(self):
         block = 0b0010_1011_1001
-        assert self.service.reverse_bit_permutation(block) == 0b1111_0000
+        assert self.service.reverse_permutation(block) == 0b1111_0000
 
     def test_reverse_bit_permutation_case_3(self):
         block = 0b1110_1101_1110
-        assert self.service.reverse_bit_permutation(block) == 0b0111_1110
+        assert self.service.reverse_permutation(block) == 0b0111_1110

@@ -20,11 +20,23 @@ class AInputsOutputsCRepository(SqliteRepository):
         self.connection.commit()
 
     def find_by_a(self, a: int) -> list[AInputsOutputsC]:
-        query = f"SELECT a, input_1, input_2, output_1, output_2, c FROM {self.table_name} " \
+        query = f"SELECT a, input_1, input_2, output_1, output_2, c " \
+                f"FROM {self.table_name} " \
                 f"WHERE a=? ORDER BY c"
         self.cursor.execute(query, (a,))
-        result = [
+        models = [
             self.translator.from_db_tuple(item)
             for item in self.cursor.fetchall()
         ]
-        return result
+        return models
+
+    def find_by_a_and_c(self, a: int, c: int) -> list[AInputsOutputsC]:
+        query = f"SELECT a, input_1, input_2, output_1, output_2, c " \
+                f"FROM {self.table_name} " \
+                f"WHERE (a=?) AND (c=?)"
+        self.cursor.execute(query, (a, c))
+        models = [
+            self.translator.from_db_tuple(item)
+            for item in self.cursor.fetchall()
+        ]
+        return models

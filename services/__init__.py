@@ -1,3 +1,5 @@
 from .bit_computing_service import BitComputingService
 from .bit_permutation_service import BitPermutationService
 from .s_block_analytics_service import SBlockAnalyticsService
+from .f_analytics_service import FAnalyticsService
+from .key_search_service import KeySearchService
